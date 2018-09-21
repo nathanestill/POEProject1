@@ -16,17 +16,17 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (pos1 = 0; pos1 <= 180; pos1 += 1) { // goes from 0 degrees to 180 degrees
+  for (pos1 = 60; pos1 <= 120; pos1 += 2) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
     panservo.write(pos1);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
-    for (pos2 = 0; pos2 <= 180; pos2 += 1) { // goes from 0 degrees to 180 degrees
+    for (pos2 = 50; pos2 <= 130; pos2 += 2) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       tiltservo.write(pos2);              // tell servo to go to position in variable 'pos'
       delay(15);                       // waits 15ms for the servo to reach the position
       printReadings(analogInPin, pos1, pos2); // prints all of the readings to the python script to visualize it
     }
-    for (pos2 = 180; pos2 >= 0; pos2 -= 1) { // goes from 180 degrees to 0 degrees
+    for (pos2 = 130; pos2 >= 50; pos2 -= 2) { // goes from 180 degrees to 0 degrees
       tiltservo.write(pos2);  // tell servo to go to position in variable 'pos'
       delay(15);                       // waits 15ms for the servo to reach the position
       printReadings(analogInPin, pos1, pos2); // prints all of the readings to the python script to visualize it

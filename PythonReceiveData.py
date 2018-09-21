@@ -12,6 +12,7 @@ from math import *
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+
 #
 # NOTE: While this is running, you can not re-program the Arduino.  You must exit
 # this Phython program before downloading a sketch to the Arduino.
@@ -46,11 +47,14 @@ serialPort = serial.Serial(arduinoComPort, baudRate, timeout=1)
 fig = plt.figure() # adds a figure
 ax = fig.add_subplot(111, projection='3d') # Makes the figure 3D
 # initializes a counter so we know when to stop
+Xs = [];
+Ys = [];
+Zs = [];
 counter = 0
 #
 # main loop to read data from the Arduino, then display it
 #
-while counter < 1000: # stops when all of the angles have been depleted
+while counter < 2399: # stops when all of the angles have been depleted
   #
   # ask for a line of data from the serial port, the ".decode()" converts the
   # data from an "array of bytes", to a string
@@ -71,7 +75,11 @@ while counter < 1000: # stops when all of the angles have been depleted
     CoordX = Distance * (-sin(angle1)*cos(angle2)) # Gets the X coordinate with trig
     CoordY = Distance * (sin(angle2)) # gets the Y coordinate with trig
     CoordZ = Distance * (cos(angle1) * cos(angle2)) # gets the Z coordinate with trig
-    ax.scatter(CoordX,CoordZ,CoordY) # plots this point in 3D space
+    if(Distance < 60 and Distance > 30):
+	    Xs.append(CoordX)
+	    Ys.append(CoordY)
+	    Zs.append(CoordZ)
+
 
     #
     # print the results
@@ -79,6 +87,7 @@ while counter < 1000: # stops when all of the angles have been depleted
     print(Distance) 
     print("{" + str(CoordX) + ", " + str(CoordY) + ", " + str(CoordZ) + "}")
 
+ax.scatter(Xs,Ys,Zs)
 ax.set_xlabel('X') # labels the X axis
 ax.set_ylabel('Y') # labels the Y axis
 ax.set_zlabel('Z') # labels the Z axis
