@@ -64,19 +64,19 @@ while counter < 1000: # stops when all of the angles have been depleted
     # data was received, convert it into 4 integers
     #
     counter = counter+1 # increments the counter because data was received
-    SensorValue, angle1, angle2 = (int(x) for x in lineOfData.split(',')) # u
-    Distance = SensorValue / 100.0
-    angle1 = radians(angle1 - 90)
-    angle2 = radians(angle2 - 90)
-    CoordX = Distance * (-sin(angle1)*cos(angle2))
-    CoordY = Distance * (sin(angle2))
-    CoordZ = Distance * (cos(angle1) * cos(angle2))
-    ax.scatter(CoordX,CoordZ,CoordY)
+    SensorValue, angle1, angle2 = (int(x) for x in lineOfData.split(',')) # receives the data from the Arduino
+    Distance = SensorValue / 100.0 # The data was sent as an int multiplied by 100, so it is divided by 100 to get cm
+    angle1 = radians(angle1 - 90) # subtracts 90 from each angle to center it
+    angle2 = radians(angle2 - 90) # subtracts 90 from each angle to center it
+    CoordX = Distance * (-sin(angle1)*cos(angle2)) # Gets the X coordinate with trig
+    CoordY = Distance * (sin(angle2)) # gets the Y coordinate with trig
+    CoordZ = Distance * (cos(angle1) * cos(angle2)) # gets the Z coordinate with trig
+    ax.scatter(CoordX,CoordZ,CoordY) # plots this point in 3D space
 
     #
     # print the results
     #
-    print(Distance)
+    print(Distance) 
     print("{" + str(CoordX) + ", " + str(CoordY) + ", " + str(CoordZ) + "}")
 
 ax.set_xlabel('X')
