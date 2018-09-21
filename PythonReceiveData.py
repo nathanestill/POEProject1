@@ -41,16 +41,16 @@ baudRate = 9600
 # open the serial port
 #
 serialPort = serial.Serial(arduinoComPort, baudRate, timeout=1)
-Xs = []
-Ys = []
-Zs = []
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+
+
+fig = plt.figure() # adds a figure
+ax = fig.add_subplot(111, projection='3d') # Makes the figure 3D
+# initializes a counter so we know when to stop
 counter = 0
 #
 # main loop to read data from the Arduino, then display it
 #
-while counter < 1000:
+while counter < 1000: # stops when all of the angles have been depleted
   #
   # ask for a line of data from the serial port, the ".decode()" converts the
   # data from an "array of bytes", to a string
@@ -63,8 +63,8 @@ while counter < 1000:
     #
     # data was received, convert it into 4 integers
     #
-    counter = counter+1
-    SensorValue, angle1, angle2 = (int(x) for x in lineOfData.split(','))
+    counter = counter+1 # increments the counter because data was received
+    SensorValue, angle1, angle2 = (int(x) for x in lineOfData.split(',')) # u
     Distance = SensorValue / 100.0
     angle1 = radians(angle1 - 90)
     angle2 = radians(angle2 - 90)
@@ -72,10 +72,6 @@ while counter < 1000:
     CoordY = Distance * (sin(angle2))
     CoordZ = Distance * (cos(angle1) * cos(angle2))
     ax.scatter(CoordX,CoordZ,CoordY)
-    
-    Xs.append(CoordX)
-    Ys.append(CoordY)
-    Zs.append(CoordZ)
 
     #
     # print the results
