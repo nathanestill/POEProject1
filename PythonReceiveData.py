@@ -79,8 +79,8 @@ while counter < 1000: # stops when all of the angles have been depleted
     print(Distance) 
     print("{" + str(CoordX) + ", " + str(CoordY) + ", " + str(CoordZ) + "}")
 
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
+ax.set_xlabel('X') # labels the X axis
+ax.set_ylabel('Y') # labels the Y axis
+ax.set_zlabel('Z') # labels the Z axis
 
-plt.show()
+plt.show() # shows the plot
