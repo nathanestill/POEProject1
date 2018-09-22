@@ -54,7 +54,7 @@ counter = 0
 #
 # main loop to read data from the Arduino, then display it
 #
-while counter < 2399: # stops when all of the angles have been depleted
+while counter < 1649: # stops when all of the angles have been depleted
   #
   # ask for a line of data from the serial port, the ".decode()" converts the
   # data from an "array of bytes", to a string
@@ -75,10 +75,10 @@ while counter < 2399: # stops when all of the angles have been depleted
     CoordX = Distance * (-sin(angle1)*cos(angle2)) # Gets the X coordinate with trig
     CoordY = Distance * (sin(angle2)) # gets the Y coordinate with trig
     CoordZ = Distance * (cos(angle1) * cos(angle2)) # gets the Z coordinate with trig
-    if(Distance < 60 and Distance > 30):
-	    Xs.append(CoordX)
-	    Ys.append(CoordY)
-	    Zs.append(CoordZ)
+    if (Distance < 35 and Distance > 20):
+        Xs.append(CoordX)
+        Ys.append(CoordY)
+        Zs.append(CoordZ)
 
 
     #
