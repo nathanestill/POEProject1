@@ -5,7 +5,7 @@ Servo tiltservo;
 
 int pos1 = 0;
 int pos2 = 0;
-
+int delayTime = 200;
 const int analogInPin = A0;
 int sensorValue = 0;
 void setup() {
@@ -19,19 +19,19 @@ void loop() {
   for (pos1 = 75; pos1 <= 105; pos1 += 1) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
     panservo.write(pos1);              // tell servo to go to position in variable 'pos'
-    delay(200);                       // waits 15ms for the servo to reach the position
+    delay(delayTime);                       // waits 15ms for the servo to reach the position
     for (pos2 = 65; pos2 <= 120; pos2 += 1) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       tiltservo.write(pos2);              // tell servo to go to position in variable 'pos'
-      delay(200);                       // waits 15ms for the servo to reach the position
+      delay(delayTime);                       // waits 15ms for the servo to reach the position
       printReadings(analogInPin, pos1, pos2); // prints all of the readings to the python script to visualize it
     }
     pos1 += 1;
     panservo.write(pos1);
-    delay(200);
+    delay(delayTime);
     for (pos2 = 120; pos2 >= 65; pos2 -= 1) { // goes from 180 degrees to 0 degrees
       tiltservo.write(pos2);  // tell servo to go to position in variable 'pos'
-      delay(200);                       // waits 15ms for the servo to reach the position
+      delay(delayTime);                       // waits 15ms for the servo to reach the position
       printReadings(analogInPin, pos1, pos2); // prints all of the readings to the python script to visualize it
     }
   }
